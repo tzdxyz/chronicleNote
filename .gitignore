@@ -1,6 +1,6 @@
 ## User Defined
 backup/
-
+.vscode/
 
 ## Common Rules
 *.com
