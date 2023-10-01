@@ -1,14 +1,17 @@
-// Tomzhai@2023
-// this scheduler imitate anki's scheduler and used for ChronicleNote 
+// FUNTION:
+// this scheduler imitate anki's scheduler 
+// ... and used for ChronicleNote to change review property
+// AUTHOR:
+// Tom
 
 // UPDATES:
 // 1.01(23042023): parse score into number 
-// 1.02(24042023): enxtedn maxInterval to 180 days.
+// 1.02(24042023): extend maxInterval to 180 days.
 
 
 const maxInterval = 180;
 
-// 间隔天数
+// interval days
 function I(n, Inm1, EF){
   let i;
   if (n==0 || n==-1){
@@ -28,7 +31,7 @@ function I(n, Inm1, EF){
   return i;
 }
 
-//容易系数 Easy_Factor
+//Easy_Factor
 function changeEF(EF, score){
   switch (score) {
     case 1:
