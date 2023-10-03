@@ -83,6 +83,31 @@ requirements:
 - easy search&query
 
 ----
+## [D: 17-02-2023 20:25:44]
+ #dev #spaced-repetition
+
+review property for spaced-repetition: [rv: n_EF_dateStr_Inm1_lastReviewDate]
+
+It uses the SM-2 algorithm, and the principle of spaced-repetition is shown in the following image:
+![spaced repetition](./spaced-repetition.png)
+
+reference:
+- https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html
+- http://www.supermemo.com/english/ol/sm2.htm
+
+----
+## [D: 29-03-2023 20:22:20]
+ #dev #knowledge
+
+The chronicleNote records ideas and thoughts quickly. 
+
+----
+## [D: 29-03-2023 20:24:36]
+ #dev #knowledge
+
+With traditional noting methods, I have to spend a lot of time organizing the sturcture of notes.
+
+----
 ## [D: 31-05-2023 11:53:49]
  #quote
 
@@ -91,7 +116,6 @@ requirements:
 
 > Whosoever unceasingly strives upward... him we can save.
 > *-Goethe, 'Faust'*
-
 
 ----
 ## [D: 09-07-2023 11:23:28]

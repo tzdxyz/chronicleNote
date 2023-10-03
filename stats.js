@@ -9,7 +9,7 @@ const filePath = process.argv[2];
 const fileText = fs.readFileSync(filePath, "utf8");
 
 let entriesArray = chro.divideText(fileText, chro.delimiter);
-chro.parseTimeInArray(entriesArray, chro.timePattern, mode="d");
-chro.parseTagsInArray(entriesArray, chro.tagLinesPattern, chro.tagPattern, mode="d");
+chro.parseTimeInArray(entriesArray, chro.timePattern, mode="n");
+chro.parseTagsInArray(entriesArray, chro.tagLinesPattern, chro.tagPattern, mode="n");
 
-chro.stats(entriesArray, mode="a");
+chro.stats(entriesArray, mode="n");

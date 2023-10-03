@@ -13,11 +13,14 @@ structured in seperate entries.
 
 # Standard format (based on markdown)
 
-\-\-\-\- （entries seperation line）
-\#\# [D: xxxx]  （time stamp）
+\-\-\-\- (entries seperation line)
+
+\#\# [D: dd:MM:yyyy HH:mm:ss]  （time stamp）
+
  #tag1 #tag2  （tag line）
 
-(main content)
+...(main content)
+
 
 ### For examples：
 
