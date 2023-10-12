@@ -51,13 +51,13 @@ See note_example.md for more cases.
 
 \-\-\-\- (entries seperation line)
 
-D: dd:MM:yyyy HH:mm:ss  （time stamp） #tag1 #tag2  （tag line）
+dd:MM:yyyy HH:mm:ss  （time stamp） #tag1 #tag2  （tag line）
 
 ...(main content)
 
 ### For examples：
 
 ----
-D: 12-10-2023 08:13:00 #noteDesign #todo
+12-10-2023 08:13:00 #noteDesign #todo
 
 update the software to handle this kind of template
