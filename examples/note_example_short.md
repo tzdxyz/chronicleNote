@@ -4,21 +4,11 @@
 What is my attitude towards this new semester? How can I balance social affairs and study?
 
 ----
-24-04-2017 12:00:00 #sport #life
-
-This morning, while playing badminton, I felt finding myself after a long time. Is there some way to keep the feeling of concentrating like this?
-
-----
 14-10-2018 12:00:00 #ent #life #todo
 
 After 3 days of game abstinence, I know the video game is not necessary. However I still need some ways to relax.
 
-- [ ] live a regular life.
-
-----
-29-07-2019 22:50:00 #love
-
-Imagine having the day with the girl.
+- [ ] have a regular life.
 
 ----
 04-10-2020 10:20:00 #finance #record
@@ -67,5 +57,10 @@ The chronicleNote records ideas and thoughts quickly.
 01-10-2023 10:19:00 #warning #dev
  
 The default end of line character is LF, not CRLF(default in windows).
+
+----
+14-10-2023 16:14:32 #dev #idea
+
+the entries in note should be Publish or Perish.
 
 
