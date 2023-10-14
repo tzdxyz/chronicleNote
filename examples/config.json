@@ -1,0 +1,5 @@
+{
+    "template": "./libs/temShort.js",
+    "perishHours": 24,
+    "stayTags": ["work", "publish", "record"]
+}

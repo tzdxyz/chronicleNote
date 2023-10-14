@@ -13,6 +13,7 @@
 // 0.71(16-06-2023):    support tags Line in assemblyDirectAndSaveArray
 // 0.75(28-09-2023):	add a standard process function containing preliminary process like parse, makeID and etc.
 //						add a merge function to concatenate multiple entries arrays in time ascending order.
+// 0.78(14-10-2023):	add a filter function to select entries before a datetime
 
 const fs = require('fs');
 
@@ -108,10 +109,6 @@ const tagLinesPattern = /^(\s)+#[^\r\n]+/gm;
 // regular expression for extracting tag's name in "#tag1 #tag2"
 const tagPattern = /#(\S+)/g;
 
-// // old tag pattern "\n@tag1 @tag2\n...\n@tag3\n..."
-//const tagLinesPattern = /^@[^\r\n]+/gm;
-//const tagPattern = /@(\S+)/g;
-
 
 // parse tags info
 // first parse lines for tags, then parse tags in these lines.
@@ -150,37 +147,6 @@ function parseTagsInArray(entriesArray, tagLinesPattern, tagPattern, mode="n"){
 
     
     });
-}
-
-// regular expression for parse todolist in "- [ ] something" or '* [ ] something', 
-const todoPattern    = /[-\*] \[ ] (.*)/gm;
-// regular expression for parse todolist in "- [*] something" or '* [*] something'
-const todoFinPattern = /[-\*] \[x] (.*)/gm;
-// regular expression for parse todolist in "-(or *) [ ] ~~something~~"
-const todoDelPattern = /[-\*] \[ ] ~~(.*)~~/gm;
-
-// parse todolist info
-function parseTodosInArray(entriesArray, todoPattern, todoFinPattern){
-    
-    entriesArray.forEach(el => {
-        el.todoList = [];
-        // finished todo list
-        el.todoFinList = [];
-
-        let todoMatch
-
-        while ((todoMatch = todoPattern.exec(el.text)) !== null) {
-            el.todoList.push(todoMatch[1]);
-            // console.log("todo: ", todoMatch[1]);
-        }
-
-        while ((todoMatch = todoFinPattern.exec(el.text)) !== null) {
-            el.todoFinList.push(todoMatch[1]);
-            // console.log("finished: ", todoMatch[1]);
-        }
-
-    });
-
 }
 
 
@@ -295,32 +261,17 @@ function filterArrayByRejectKeywords(entriesArray, keywords, mode="all"){
     return filteredArray;
 }
 
-// -------------------- OUTPUT PART --------------------
-
-const todoTag  = "待办";
-const todoTag2 = "todo";
-// output entries array with todo tag and list
-// save info the file if filename is given
-function outputTodo(entriesArray, todoTag, filename){
-    
-    let todoListAll = [];
-    entriesArray.forEach(en => {
-        if (en.tagsArray.includes(todoTag)){
-            if (en.todoList.length != 0) {
-
-                todoListAll.push(...en.todoList.map(str => en.time.toLocaleDateString("en-GB", { year: "numeric", month: "2-digit", day: "2-digit" }) + " "+ str));
-            }
-        }
+// get a filtered entry array according to the given datetime
+function filterArrayBeforeDatetime(entriesArray, datetime){
+    let filteredArray = entriesArray.filter(el => {
+        return el.time < datetime;
     });
 
-    todoText = todoListAll.join("\n");
-
-    if (filename != undefined) {
-        fs.writeFileSync(filename, todoText);
-    }
-
-    return todoText;
+    return filteredArray;
 }
+
+// -------------------- OUTPUT PART --------------------
+
 
 // join text directly and
 // ... save entries array to file with global delimiter
@@ -336,7 +287,7 @@ function joinAndSaveArray(entriesArray, delimiter, name="output.md"){
     fs.writeFileSync(name, text);
 }
 
-// assembly different properties of the entries into one text by default format 
+// assembly different properties of the entries into one text by Standard format 
 // ... then save entries array to file.
 function assemblyDirectAndSaveArray(entriesArray, name="output.md"){
     let text = entriesArray.map(el => {
@@ -348,7 +299,7 @@ function assemblyDirectAndSaveArray(entriesArray, name="output.md"){
         
         // use trim to remove whitespace from both ends
         if (el.tagsArray.length >0)
-            return delimiter + timeLine + el.tagsArray.map(tag=>"@"+tag).join(" ") + "\n\n" + el.text.trim();
+            return delimiter + timeLine + el.tagsArray.map(tag=>"#"+tag).join(" ") + "\n\n" + el.text.trim();
         else    
             return delimiter + timeLine + "\n" + el.text.trim();
     
@@ -374,31 +325,13 @@ function stats(entriesArray, mode="n"){
 	}
 }
 
-
-module.exports = {
-    delimiter,
-    delimiterStr,
-    divideText,
-    timePattern,
-    parseTimeInArray,
-    tagLinesPattern,
-    tagPattern,
-    parseTagsInArray,
-    todoPattern,
-    todoFinPattern,
-    parseTodosInArray,
-    makeIDByTime,
-	mergeArrays,
-	stdProcess,
-    filterEntriesByPattern,
-    filterArrayByKeywords,
-    filterArrayByRejectKeywords,
-    todoTag,
-    outputTodo,
-    joinAndSaveArray,
-    assemblyDirectAndSaveArray,
-    stats,
-};
+// ----------------------AUXILIARY PART---------------------------
+function getNewFileName(filePath, prefix){
+    const fileSpt = /[\/\\]/;
+    let newFilePath = filePath.split(fileSpt).slice(0,-1).join("/") +"/" +prefix +filePath.split(fileSpt).pop();
+    
+    return newFilePath
+}
 
 
 // --------------- Old function and vars backup --------------------------
@@ -438,4 +371,87 @@ function parseTimeInArrayOld(entriesArray, timePattern, mode="n") {
 
     });
 }
+
+// regular expression for parse todolist in "- [ ] something" or '* [ ] something', 
+const todoPattern    = /[-\*] \[ ] (.*)/gm;
+// regular expression for parse todolist in "- [*] something" or '* [*] something'
+const todoFinPattern = /[-\*] \[x] (.*)/gm;
+// regular expression for parse todolist in "-(or *) [ ] ~~something~~"
+const todoDelPattern = /[-\*] \[ ] ~~(.*)~~/gm;
+
+// parse todolist info
+function parseTodosInArray(entriesArray, todoPattern, todoFinPattern){
+    
+    entriesArray.forEach(el => {
+        el.todoList = [];
+        // finished todo list
+        el.todoFinList = [];
+
+        let todoMatch
+
+        while ((todoMatch = todoPattern.exec(el.text)) !== null) {
+            el.todoList.push(todoMatch[1]);
+            // console.log("todo: ", todoMatch[1]);
+        }
+
+        while ((todoMatch = todoFinPattern.exec(el.text)) !== null) {
+            el.todoFinList.push(todoMatch[1]);
+            // console.log("finished: ", todoMatch[1]);
+        }
+
+    });
+
+}
+
+const todoTag  = "待办";
+const todoTag2 = "todo";
+// output entries array with todo tag and list
+// save info the file if filename is given
+function outputTodo(entriesArray, todoTag, filename){
+    
+    let todoListAll = [];
+    entriesArray.forEach(en => {
+        if (en.tagsArray.includes(todoTag)){
+            if (en.todoList.length != 0) {
+
+                todoListAll.push(...en.todoList.map(str => en.time.toLocaleDateString("en-GB", { year: "numeric", month: "2-digit", day: "2-digit" }) + " "+ str));
+            }
+        }
+    });
+
+    todoText = todoListAll.join("\n");
+
+    if (filename != undefined) {
+        fs.writeFileSync(filename, todoText);
+    }
+
+    return todoText;
+}
+
+module.exports = {
+    delimiter,
+    delimiterStr,
+    divideText,
+    timePattern,
+    parseTimeInArray,
+    tagLinesPattern,
+    tagPattern,
+    parseTagsInArray,
+    todoPattern,
+    todoFinPattern,
+    parseTodosInArray,
+    makeIDByTime,
+	mergeArrays,
+	stdProcess,
+    filterEntriesByPattern,
+    filterArrayByKeywords,
+    filterArrayByRejectKeywords,
+    filterArrayBeforeDatetime,
+    todoTag,
+    outputTodo,
+    joinAndSaveArray,
+    assemblyDirectAndSaveArray,
+    stats,
+    getNewFileName,
+};
 
