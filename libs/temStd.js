@@ -1,4 +1,12 @@
 // standard template (for specific information, see ChroFunc_)
+/* for examples:
+----
+## [D: 17-12-2022 08:57]
+ #game #record
+
+Just unlocked a rare achievement in my favorite game! Feeling like a true gaming champion right now! 
+
+*/
 
 const delimiter     = /----\r*\n/;
 const delimiterStr  = "----\n";

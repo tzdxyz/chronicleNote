@@ -15,32 +15,12 @@ https://excalidraw.com/#room=cc52d0e3d4a83dadc1fb,_H4CUjuq3aHvFx5u_tpirA
 - (future) Support reference.
 - (future) Support properties.
 
-# Standard format (based on markdown)
+# Format
 
-\-\-\-\- (entries seperation line)
-
-\#\# [D: dd:MM:yyyy HH:mm:ss]  （time stamp）
-
- #tag1 #tag2  （tag line）
-
-...(main content)
+Standard format (deprecated, for more info, see examples and template script)
 
 
-### For examples：
-
-----
-\#\# [D: 16-12-2022 17:35]
- #life #tech #todo
-
-- [ ] Use my laptop to learn Org mode.
-
-----
-\#\# [D: 17-12-2022 08:57]
- #game #record
-
-Just unlocked a rare achievement in my favorite game! Feeling like a true gaming champion right now! 
-
-# Short format (based on markdown)
+## Short format (based on markdown)
 
 \-\-\-\- (entries seperation line)
 
