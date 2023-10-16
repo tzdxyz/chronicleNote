@@ -25,8 +25,10 @@ const rejectTags = config.stayTags.map(tagname => "#"+tagname);console.log(rejec
 let perishArray = chro.filterArrayByRejectKeywords(filteredArray1, rejectTags);
 
 // save entries
-const perishPath = chro.getNewFileName(filePath, "perish_"); 
-chro.joinAndSaveArray(perishArray, tpt.delimiterStr, perishPath);
+if (perishArray.length>0){
+	const perishPath = chro.getNewFileName(filePath, "perish_"); 
+	chro.joinAndSaveArray(perishArray, tpt.delimiterStr, perishPath);
+}
 
 let stayArray = entriesArray.filter( el => !perishArray.includes( el ) );
 chro.joinAndSaveArray(stayArray, tpt.delimiterStr, filePath);
