@@ -15,7 +15,7 @@ const filePath = process.argv[3];
 const fileText = fs.readFileSync(filePath, "utf8");
 
 // preliminary process of note
-const chro = require("./libs/ChroFunc_v0.78.js");
+const chro = require("../libs/ChroFunc_v0.78.js");
 let entriesArray = chro.stdProcess(fileText, tpt.delimiter, tpt.timePattern, tpt.tagLinesPattern, tpt.tagPattern);
 
 // filter the entries that shoule be perish

@@ -14,7 +14,7 @@ const tpt  = require(config.template);
 const filePath = process.argv[3];
 const fileText = fs.readFileSync(filePath, "utf8");
 
-const chro = require("./libs/ChroFunc_v0.78.js");
+const chro = require("../libs/ChroFunc_v0.78.js");
 let entriesArray = chro.divideText(fileText, tpt.delimiter);
 chro.parseTimeInArray(entriesArray, tpt.timePattern, mode="n");
 chro.parseTagsInArray(entriesArray, tpt.tagLinesPattern, tpt.tagPattern, mode="n");

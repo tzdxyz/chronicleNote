@@ -1,5 +1,5 @@
 ----
-11-08-2015 12:00:00 #school
+11-08-2015 12:00:00 #school #life
 
 What is my attitude towards this new semester? How can I balance social affairs and study?
 
