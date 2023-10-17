@@ -39,3 +39,14 @@ update the software to handle this kind of template.
 30-09-2023 23:00 #tips
 
 See examples folder for more information. 
+
+# Usage/doc
+
+programs are stored in src folder, usage can be found in each file.
+
+for examples:
+
+```node
+node ./src/stats.js ./examples/config.json ./examples/note_example_short.md
+```
+
