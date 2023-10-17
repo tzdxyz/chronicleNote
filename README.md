@@ -40,9 +40,11 @@ update the software to handle this kind of template.
 
 See examples folder for more information. 
 
-# Usage/doc
+# Usage/doc for programs
 
-programs are stored in src folder, usage can be found in each file.
+libraries are in libs folder.
+
+programs are in src folder, usage can be found in each file.
 
 for examples:
 
